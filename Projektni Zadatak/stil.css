@@ -40,7 +40,7 @@ body {
     padding-left: 2em;
     padding-top: 2%;
 }
-a[name="trenutna"] {
+#trenutna {
     color: #ca2a2a
 }
 a {

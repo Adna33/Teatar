@@ -128,6 +128,7 @@ window.onkeyup = function (event) {
 function ucitaj(naziv) {
     var ajax = new XMLHttpRequest();
     var div = document.getElementById('wrapper');
+    
     ajax.onreadystatechange = function () {
         if (ajax.readyState == 4 && ajax.status == 200)
             document.getElementById("sadrzaj").innerHTML = ajax.responseText;
@@ -139,30 +140,61 @@ function ucitaj(naziv) {
         
         ajax.send();
         div.style.backgroundColor = '#131112';
+        var tren = document.getElementById("trenutna");
+		tren.id="";
+		var aktivna = document.getElementsByTagName('li')[0];
+		var aktivnalink = aktivna.getElementsByTagName("a")[0];
+		aktivnalink.id = "trenutna";
+        
     }
     if (naziv === 'Vijesti') {
         ajax.open("GET", "Vijesti.html", true);
         ajax.send();
         div.style.backgroundColor = '#2c2627';
+        var tren = document.getElementById("trenutna");
+		tren.id="";
+		var aktivna = document.getElementsByTagName('li')[3];
+		var aktivnalink = aktivna.getElementsByTagName("a")[0];
+		aktivnalink.id = "trenutna";
     }
     if (naziv === 'Repertoar') {
         ajax.open("GET", "Repertoar.html", true);
         ajax.send();
         div.style.backgroundColor = '#2c2627';
+        var tren = document.getElementById("trenutna");
+		tren.id="";
+		var aktivna = document.getElementsByTagName('li')[2];
+		var aktivnalink = aktivna.getElementsByTagName("a")[0];
+		aktivnalink.id = "trenutna";
     }
     if (naziv === 'Galerija') {
         ajax.open("GET", "Galerija.html", true);
         ajax.send();
         div.style.backgroundColor = '#2c2627';
+        var tren = document.getElementById("trenutna");
+		tren.id="";
+		var aktivna = document.getElementsByTagName('li')[1];
+		var aktivnalink = aktivna.getElementsByTagName("a")[2];
+		aktivnalink.id = "trenutna";
     }
     if (naziv === 'Kontakt') {
         ajax.open("GET", "Kontakt.html", true);
         ajax.send();
         div.style.backgroundColor = '#2c2627';
+        var tren = document.getElementById("trenutna");
+		tren.id="";
+		var aktivna = document.getElementsByTagName('li')[4];
+		var aktivnalink = aktivna.getElementsByTagName("a")[0];
+		aktivnalink.id = "trenutna";
     }
     if (naziv === 'Pozorista') {
         ajax.open("GET", "Pozorista.html", true);
         ajax.send();
         div.style.backgroundColor = '#2c2627';
+        var tren = document.getElementById("trenutna");
+		tren.id="";
+		var aktivna = document.getElementsByTagName('li')[1];
+		var aktivnalink = aktivna.getElementsByTagName("a")[1];
+		aktivnalink.id = "trenutna";
     }
 }
