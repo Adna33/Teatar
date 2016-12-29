@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<komentari>
+<utisak>
+<name>User</name>
+<komentar>kom</komentar>
+</utisak>
+<utisak>
+<name>Name</name>
+<komentar>novi komentar</komentar>
+</utisak>
+
+
+<utisak>
+<name>Anonimni korisnik</name>
+<komentar>Anonimni komentar</komentar>
+</utisak>
+<utisak>
+<name>Adna Karkelja</name>
+<komentar>Proba utiska, sve radi</komentar>
+</utisak>
+</komentari>
