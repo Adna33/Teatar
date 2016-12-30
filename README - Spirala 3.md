@@ -13,7 +13,7 @@
 - Dok korisnik upisuje vrijednost pretrage, ispod mu se prikazuje do 10 najsličnijih stavki, po poljima naziva predstave i dana prikazivanja. Pri tome se stranica ne reloaduje
 - Kada korisnik pritisne na dugme 'Pretraži' prikazuju mu se svi rezultati koji zadovoljavaju uslov
 - Urađen deployment na open shift 
- - Početna stranica: http://teatar-wt-teatar.44fs.preview.openshiftapps.com/ProjektniZadatak/Onama.php
+ - Početna stranica: http://teatar-wt-teatar.44fs.preview.openshiftapps.com/Projektni%20Zadatak/Onama.php
   
 ### II  - Šta nije urađeno?
 ### III - Bug-ovi koje ste primijetili ali niste stigli ispraviti, a znate rješenje (opis rješenja)
