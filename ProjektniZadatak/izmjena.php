@@ -53,7 +53,8 @@ table td {border:solid 1px #fab; width:50px; word-wrap:break-word;}
             <h1> Komentari </h1>
                 <form method="POST" enctype="multipart/form-data" accept-charset="utf-8" name="izbrisiUtisak">
             <?php
-                $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+                   //$dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+    $dbh = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=spirala4', 'admin', '1234');
                         $rezultat = $dbh->query("SELECT id, ime, komentar FROM utisak");
                         if (!$rezultat) {
                             $greska = $dbh->errorInfo();
@@ -93,7 +94,8 @@ table td {border:solid 1px #fab; width:50px; word-wrap:break-word;}
             <h1> Glasovi </h1>
             <form method="POST" enctype="multipart/form-data" accept-charset="utf-8" name="izbrisiUtisak">
             <?php
-                $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+                   //$dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+    $dbh = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=spirala4', 'admin', '1234');
                 $rezultat = $dbh->query("SELECT id, glas FROM anketa");
                         if (!$rezultat) {
                             $greska = $dbh->errorInfo();
@@ -134,7 +136,8 @@ table td {border:solid 1px #fab; width:50px; word-wrap:break-word;}
     <div class="red">
         <h1> Preplate </h1>
         <?php
-            $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+               //$dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+    $dbh = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=spirala4', 'admin', '1234');
             $rezultat = $dbh->query("SELECT id, ime, prezime, telefon, mail FROM preplata");
                         if (!$rezultat) {
                             $greska = $dbh->errorInfo();

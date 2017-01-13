@@ -8,7 +8,8 @@ if(empty($_POST['terminPredstava'])){
 $msg .= "Unesite predstavu!<br>";
 }
 if(empty($msg)){
-    $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+       //$dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+    $dbh = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=spirala4', 'admin', '1234');
     $vrijeme=$_POST['termin'];
     $predstavaT=$_POST['terminPredstava'];
     $query = $dbh->prepare("SELECT id AS kljuc FROM predstava WHERE ime= :imeP");

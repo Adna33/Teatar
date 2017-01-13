@@ -11,7 +11,8 @@ class IZVJESTAJ extends FPDF
 $file = new IZVJESTAJ();
 $file->AddPage();
 $file->SetFont('Times','',12);
-$dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+   //$dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+    $dbh = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=spirala4', 'admin', '1234');
 $rezultat = $dbh->query("SELECT ime, komentar FROM utisak");
 
 foreach ($rezultat as $u) {

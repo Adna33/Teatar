@@ -52,7 +52,8 @@
             <?php 
     
      if (isset($_REQUEST['unosPretrage'])){
-        $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+           //$dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+    $dbh = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=spirala4', 'admin', '1234');
         $rezultat = $dbh->query("SELECT ime, dan, opis FROM predstava");
         if (!$rezultat) {
                             $greska = $dbh->errorInfo();

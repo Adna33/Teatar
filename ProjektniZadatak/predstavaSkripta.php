@@ -14,7 +14,8 @@ if(empty($msg)){
     $imePredstave=$_POST['imePr'];
     $danPredstave=$_POST['danPr'];
     $opisPredstave=$_POST['opisPr'];   
-    $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+       //$dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+    $dbh = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=spirala4', 'admin', '1234');
     $sql = $dbh->prepare("SELECT COUNT(id) AS broj FROM predstava WHERE ime= :imeP");
     $sql->bindParam(':imeP', $imePredstave);
     $sql->execute();

@@ -9,7 +9,8 @@ $msg .= "Unesite kritiku!<br>";
 }
 
 if(empty($msg)){ 
-    $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+       //$dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+    $dbh = new PDO('mysql:host=' . getenv('MYSQL_SERVICE_HOST') . ';port=3306;dbname=spirala4', 'admin', '1234');
     $kritika=$_POST['opisKritika'];
     $predstava=$_POST['kritikaPredstava'];
     $sql = $dbh->prepare("SELECT COUNT(id) AS broj FROM kritika WHERE tekst= :tekst");
