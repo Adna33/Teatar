@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2017 at 11:15 AM
+-- Generation Time: Jan 13, 2017 at 10:50 PM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `spirala4`
 --
+CREATE DATABASE IF NOT EXISTS `spirala4` DEFAULT CHARACTER SET utf8 COLLATE utf8_slovenian_ci;
+USE `spirala4`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `anketa`
 --
 
+DROP TABLE IF EXISTS `anketa`;
 CREATE TABLE `anketa` (
   `id` int(11) NOT NULL,
   `glas` varchar(50) COLLATE utf8_slovenian_ci NOT NULL
@@ -48,6 +51,7 @@ INSERT INTO `anketa` (`id`, `glas`) VALUES
 -- Table structure for table `kritika`
 --
 
+DROP TABLE IF EXISTS `kritika`;
 CREATE TABLE `kritika` (
   `id` int(11) NOT NULL,
   `predstava` int(11) NOT NULL,
@@ -69,6 +73,7 @@ INSERT INTO `kritika` (`id`, `predstava`, `tekst`) VALUES
 -- Table structure for table `predstava`
 --
 
+DROP TABLE IF EXISTS `predstava`;
 CREATE TABLE `predstava` (
   `id` int(11) NOT NULL,
   `ime` varchar(50) COLLATE utf8_slovenian_ci NOT NULL,
@@ -99,6 +104,7 @@ INSERT INTO `predstava` (`id`, `ime`, `dan`, `opis`) VALUES
 -- Table structure for table `preplata`
 --
 
+DROP TABLE IF EXISTS `preplata`;
 CREATE TABLE `preplata` (
   `id` int(11) NOT NULL,
   `ime` varchar(50) COLLATE utf8_slovenian_ci NOT NULL,
@@ -123,6 +129,7 @@ INSERT INTO `preplata` (`id`, `ime`, `prezime`, `telefon`, `mail`) VALUES
 -- Table structure for table `privilegije`
 --
 
+DROP TABLE IF EXISTS `privilegije`;
 CREATE TABLE `privilegije` (
   `username` varchar(50) COLLATE utf8_slovenian_ci NOT NULL,
   `password` varchar(50) COLLATE utf8_slovenian_ci NOT NULL
@@ -141,6 +148,7 @@ INSERT INTO `privilegije` (`username`, `password`) VALUES
 -- Table structure for table `raspored`
 --
 
+DROP TABLE IF EXISTS `raspored`;
 CREATE TABLE `raspored` (
   `id` int(11) NOT NULL,
   `vrijeme` datetime NOT NULL,
@@ -162,6 +170,7 @@ INSERT INTO `raspored` (`id`, `vrijeme`, `predstava`) VALUES
 -- Table structure for table `utisak`
 --
 
+DROP TABLE IF EXISTS `utisak`;
 CREATE TABLE `utisak` (
   `id` int(11) NOT NULL,
   `ime` varchar(100) COLLATE utf8_slovenian_ci NOT NULL,
