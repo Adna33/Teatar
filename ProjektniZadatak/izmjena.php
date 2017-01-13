@@ -53,22 +53,29 @@ table td {border:solid 1px #fab; width:50px; word-wrap:break-word;}
             <h1> Komentari </h1>
                 <form method="POST" enctype="multipart/form-data" accept-charset="utf-8" name="izbrisiUtisak">
             <?php
-        $rezultati = new SimpleXMLElement("komentar.xml",null,true);
+                $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+                        $rezultat = $dbh->query("SELECT id, ime, komentar FROM utisak");
+                        if (!$rezultat) {
+                            $greska = $dbh->errorInfo();
+                            print "SQL greška: " . $greska[2];
+                            exit();
+                        }
+            
                 print "<table>";
                 print "<tr>
                 <th style='width: 10%'><p>Br.</p></th> 
                 <th style='width: 40%'><p>Korisnik</p></th>
                 <th style='width: 50%'><p>Komentar</p></th> 
                 </tr>";
-        $i=0;
-        foreach ($rezultati->utisak as $u) {
-            $i=$i+1;
-             print "<td style='width: 10%'><p><b>  $i </b></p></td>";  
-             print "<td style='width: 40%'> <input type='text' name='imeUtiska".$i."'  value='". $u->name . "'></td>";
-            print "<td style='width: 50%'> <input type='text' name='komentarUtiska".$i."' value='". $u->komentar . "'></td>";
+    $i=0;
+            foreach ($rezultat as $u) {
+                $i=$i+1;
+                print "<td style='width: 10%'> <input type='text' name='idUtiska".$i."'  value='".$u['id']."'></td>";       
+                print "<td style='width: 40%'> <input type='text' name='imeUtiska".$i."'  value='".$u['ime'].  "'></td>";       
+                 print "<td style='width: 50%'> <input type='text' name='komentarUtiska".$i."' value='".$u['komentar']. "'></td>";
               print "</tr>";
-           
-        } print "</table><br>";
+                        }
+        print "</table><br>";
         ?>
                 
                     <div id="txt">
@@ -86,18 +93,24 @@ table td {border:solid 1px #fab; width:50px; word-wrap:break-word;}
             <h1> Glasovi </h1>
             <form method="POST" enctype="multipart/form-data" accept-charset="utf-8" name="izbrisiUtisak">
             <?php
-                $rezultati = new SimpleXMLElement("rezultatiAnkete.xml",null,true);
+                $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+                $rezultat = $dbh->query("SELECT id, glas FROM anketa");
+                        if (!$rezultat) {
+                            $greska = $dbh->errorInfo();
+                            print "SQL greška: " . $greska[2];
+                            exit();
+                        }
                 print "<table>";
                 print "<tr>
                 <th style='width: 15%'><p>Br.</p></th> 
                 <th><p>Glas</p></th>
                 </tr>";
         $i=0;
-        foreach ($rezultati->anketa as $u) {
+        foreach ($rezultat as $u) {
             $i=$i+1;
             print "<td style='width: 15%'><p><b>  $i </b></p></td>";             
             
-            print "<td> <input type='text' name='nazivGlasa".$i."'  value='". $u->glas . "'></td>";
+            print "<td> <input type='text' name='nazivGlasa".$i."'  value='". $u['glas'] . "'></td>";
            
             print "</tr>";
         } print "</table><br>"
@@ -121,7 +134,13 @@ table td {border:solid 1px #fab; width:50px; word-wrap:break-word;}
     <div class="red">
         <h1> Preplate </h1>
         <?php
-            $rezultati = new SimpleXMLElement("preplate.xml",null,true);
+            $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+            $rezultat = $dbh->query("SELECT id, ime, prezime, telefon, mail FROM preplata");
+                        if (!$rezultat) {
+                            $greska = $dbh->errorInfo();
+                            print "SQL greška: " . $greska[2];
+                            exit();
+                        }
             print "<table>";
                 print "<tr>
                 <th style='width: 10%'><p>Br.</p></th> 
@@ -132,15 +151,14 @@ table td {border:solid 1px #fab; width:50px; word-wrap:break-word;}
                 </tr>";
                 
                 $i=0;
-            foreach ($rezultati->preplata as $u) {
+            foreach ($rezultat as $u) {
             $i=$i+1;
                 print "<tr>";
               print "<td style='width: 10%'><p><b>  $i </b></p></td>";  
-                print "<td style='width: 20%'> <input type='text' name='ime".$i."'  value='". $u->ime . "'></td>";
-                print "<td style='width: 20%'> <input type='text' name='prezime".$i."'  value='". $u->prezime . "'></td>";
-                print "<td style='width: 20%'> <input type='text' name='tel".$i."'  value='". $u->telefon . "'></td>";
-                print "<td style='width: 30%'> <input type='text' name='mail".$i."'  value='". $u->mail . "'></td>";
-           
+                print "<td style='width: 20%'> <input type='text' name='ime".$i."'  value='". $u['ime'] . "'></td>";
+                print "<td style='width: 20%'> <input type='text' name='prezime".$i."'  value='". $u['prezime'] . "'></td>";
+                print "<td style='width: 20%'> <input type='text' name='tel".$i."'  value='". $u['telefon'] . "'></td>";
+                print "<td style='width: 30%'> <input type='text' name='mail".$i."'  value='". $u['mail'] . "'></td>";           
                 print "</tr>";
             }
                 print "</table><br>"

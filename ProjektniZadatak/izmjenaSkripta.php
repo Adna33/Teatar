@@ -1,19 +1,19 @@
 <?php
-
+  $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
 if(isset($_POST['submitUtiskaUp'])){
    
 $msg = "";
 $num= (int)$_POST['brUtiskaUp']; 
 $i=$num . "";
-if(empty($msg)){
- 
- $dom = new DOMDocument;
-$dom->load('komentar.xml');
-$imena = $dom->getElementsByTagName('name');
-$komentari= $dom->getElementsByTagName('komentar');
-$imena[$num-1]->nodeValue=$_POST["imeUtiska" . $i];
-$komentari[$num-1]->nodeValue=$_POST["komentarUtiska" . $i];
-file_put_contents('komentar.xml',$dom->saveXML());
+if(empty($msg)){ 
+  
+    $ime=$_POST["imeUtiska" . $i];
+    $komentar=$_POST["komentarUtiska" . $i];
+    $preplatasql = $dbh->prepare("UPDATE `utisak` SET `ime`= :ime, `komentar`= :komentar WHERE `id` = :id");
+    $preplatasql->bindParam(':ime', $ime);
+    $preplatasql->bindParam(':komentar', $komentar);
+    $preplatasql->bindParam(':id', $i);
+    $preplatasql->execute();    
 
 }}
 
@@ -24,18 +24,21 @@ $num= (int)$_POST['brPreplateUp'];
 $i=$num . "";
 if(empty($msg)){
     
- $dom = new DOMDocument;
-$dom->load('preplate.xml');
+    $name=$_POST["ime" . $i];
+    $lastname=$_POST["prezime" . $i];
+    $telvar=$_POST["tel" . $i];
+    $mailvar= $_POST["mail" . $i];       
+    $tel = (string)$telvar; 
+    $mail = (string)$mailvar;    
+    $preplatasql = $dbh->prepare("UPDATE `preplata` SET `ime`= :ime, `prezime`= :prezime,`telefon`= :telefon, `mail`= :mail  WHERE `id` = :id");
+    $preplatasql->bindParam(':ime', $name);
+    $preplatasql->bindParam(':prezime', $lastname);
+    $preplatasql->bindParam(':telefon', $tel);
+    $preplatasql->bindParam(':mail', $mail);
+    $preplatasql->bindParam(':id', $i);    
+    $preplatasql->execute();
+    $row=$preplatasql->fetch(PDO::FETCH_ASSOC);
     
-$imena = $dom->getElementsByTagName('ime');
-$prezimena= $dom->getElementsByTagName('prezime');
-$telefoni= $dom->getElementsByTagName('telefon');
-$mailovi= $dom->getElementsByTagName('mail');
-$imena[$num-1]->nodeValue=$_POST["ime" . $i];
-$prezimena[$num-1]->nodeValue=$_POST["prezime" . $i];
-$telefoni[$num-1]->nodeValue=$_POST["tel" . $i];
-$mailovi[$num-1]->nodeValue=$_POST["mail" . $i];
-file_put_contents('preplate.xml',$dom->saveXML());
 }}
 
 
@@ -51,10 +54,13 @@ $var="nazivGlasa" . $i;
 if( !empty($_POST[$var])){
 $izmjena = $_POST[$var];}
     else $izmjena = "nazivGlasa" . $i;
+    
+    $preplatasql = $dbh->prepare("UPDATE `anketa` SET `glas`= :glas WHERE `id` = :id");
+    $preplatasql->bindParam(':glas', $izmjena);
+    $preplatasql->bindParam(':id', $i); 
+    $preplatasql->execute();
+    $row=$preplatasql->fetch(PDO::FETCH_ASSOC);
 
-$glasovi = $dom->getElementsByTagName('glas');
-$glasovi[$num-1]->nodeValue=$izmjena;
 
-file_put_contents('rezultatiAnkete.xml',$dom->saveXML());
 }}
 ?>

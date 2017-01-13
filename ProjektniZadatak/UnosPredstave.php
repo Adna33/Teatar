@@ -10,6 +10,8 @@
 
 <BODY>
 	<?php include ("predstavaSkripta.php")?>
+    <?php include ("kritikaSkripta.php")?>
+    <?php include ("terminSkripta.php")?>
     <script src="funkcionalnosti.js"></script>
     <div id="wrapper">
         <div id="zaglavlje">
@@ -32,8 +34,7 @@
         </div>
         
         <div class="red">
-
-            <h1> Unos prestava koje igraju ove sedmice </h1>
+            <h1> Unos prestava </h1>
             <div id="FormaPredstave">
                 <form method="POST" enctype="multipart/form-data"  accept-charset="utf-8" name="predstavaforma" >
                     <div id="txt">
@@ -48,8 +49,7 @@
                         <label>Opis: </label>
                         <br>
                         <input type="text" name="opisPr" id="opisPr" onblur="prazanUnos(this)">
-                        <br>
-                       
+                        <br>                       
                     </div>
                     <br>
                     <br>
@@ -57,12 +57,55 @@
 
                         <span class="add">Unesi</span>
                     </button>
-
                 </form>
-
             </div>
+        </div>
+        <div class="red">
+            <h1> Unos termina prikazivanja predstava</h1>
+            <div id="FormaPredstave">
+                <form method="POST" enctype="multipart/form-data"  accept-charset="utf-8" name="terminforma" >
+                    <div id="txt">
+                        <label>Termin prikazivanja </label>
+                        <br>
+                        <input type="text" name="termin" id="termin" onblur="prazanUnos(this)"  placeholder="YYYY-MM-DD HH:MM">
+                        <br>
+                         <label>Predstava: </label>
+                        <br>
+                        <input type="text" name="terminPredstava" id="terminPredstava" onblur="prazanUnos(this)">
+                        <br>                       
+                    </div>
+                    <br>
+                    <br>
+                    <button type="submit" class="myButton" name="submitTermin" id="submitTermin">
 
+                        <span class="add">Unesi</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="red">
+            <h1> Unos kritika predstava </h1>
+            <div id="FormaPredstave">
+                <form method="POST" enctype="multipart/form-data"  accept-charset="utf-8" name="kritikaforma" >
+                    <div id="txt">
+                        <label>Predstava</label>
+                        <br>
+                        <input type="text" name="kritikaPredstava" id="kritikaPredstava" onblur="prazanUnos(this)">
+                        <br>
+                        <label>Opis: </label>
+                        <br>
+                        <input type="text" name="opisKritika" id="opisKritika" onblur="prazanUnos(this)">
+                        <br>
+                                               
+                    </div>
+                    <br>
+                    <br>
+                    <button type="submit" class="myButton" name="submitKritika" id="submitKritika">
 
+                        <span class="add">Unesi</span>
+                    </button>
+                </form>
+            </div>
         </div>
 
     

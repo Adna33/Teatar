@@ -8,34 +8,20 @@ if(empty($_POST['komentar'])){
 $msg .= "Unesite Komentar!<br>";
 }
 if(empty($msg)){
-$xmldoc  = "komentar.xml";
-if(!file_exists($xmldoc)){ 
-if($fp=fopen("komentar.xml",'w+')){
-fwrite($fp,"<?xml version='1.0' ?>". PHP_EOL);
-fwrite($fp,"<komentari>" . PHP_EOL);
-fwrite($fp,"<utisak>" . PHP_EOL);
-fwrite($fp,'<name>'.html_entity_decode($_POST['firstname'])."</name>". PHP_EOL);
-fwrite($fp,'<komentar>'.html_entity_decode($_POST['komentar'])."</komentar>". PHP_EOL);
-fwrite($fp,"</utisak>" . PHP_EOL);
-fwrite($fp,"</komentari>");
-fclose($fp);
-$msg =  "XML dokumenat pod nazivom ".$xmldoc. " je kreiran!";
-}else{
-$msg =  "Greska!";
-}
-}else{
-    if($fp=fopen("komentar.xml",'r+')){
-    fseek($fp, -13, SEEK_END);
-        fwrite($fp,"<utisak>". PHP_EOL);
-fwrite($fp,'<name>'.$_POST['firstname']."</name>". PHP_EOL);
-fwrite($fp,'<komentar>'.$_POST['komentar']."</komentar>". PHP_EOL);
-fwrite($fp,"</utisak>". PHP_EOL);
-fwrite($fp,"</komentari>");
-fclose($fp);
-$msg =  "XML dokumenat pod nazivom ".$xmldoc. " je update-ovan!";        
-    }
-else {$msg = "Fajl je vec kreiran!";}
-}
+    $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+    $ime=$_POST['firstname'];
+    $komentar=$_POST['komentar'];
+    $preplatasql = $dbh->prepare("SELECT COUNT(id) AS broj FROM utisak WHERE ime= :ime AND komentar= :komentar");
+    $preplatasql->bindParam(':ime', $ime);
+    $preplatasql->bindParam(':komentar', $komentar);
+    $preplatasql->execute();
+    $row=$preplatasql->fetch(PDO::FETCH_ASSOC);
+    if ($row['broj']==0){
+    $komsql = $dbh->prepare("INSERT INTO `utisak`  (`ime`, `komentar`) VALUES (?, ?)");
+    $komsql->execute(array(
+    $ime,
+     $komentar
+   ));}
 }
 }
 ?>

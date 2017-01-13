@@ -1,37 +1,33 @@
 <?php
-$xmlDoc=new DOMDocument();
-$xmlDoc->load("predstave.xml");
-$x=$xmlDoc->getElementsByTagName('predstava');
+$dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+$rezultat = $dbh->query("SELECT ime, dan, opis FROM predstava");
+       
 $j=0;
 
 $q=$_GET["q"];
 if (strlen($q)>0) {
   $predlog="";
-  for($i=0; $i<($x->length); $i++) {
-    $ime=$x->item($i)->getElementsByTagName('ime');
-    $dan=$x->item($i)->getElementsByTagName('dan');
-    $opis=$x->item($i)->getElementsByTagName('opis');  
-    if ($ime->item(0)->nodeType==1) {
-        
-      if (stristr($ime->item(0)->childNodes->item(0)->nodeValue,$q) || stristr($dan->item(0)->childNodes->item(0)->nodeValue,$q)) {
+  foreach ($rezultat as $u)  {
+            
+      if (stristr($u['ime'],$q) || stristr($u['dan'],$q)) {
           $j=$j+1;
         if ($predlog=="") {
                     
-            if(stristr($ime->item(0)->childNodes->item(0)->nodeValue,$q)){
-                $predlog=$predlog .$ime->item(0)->childNodes->item(0)->nodeValue;
+            if(stristr($u['ime'],$q)){
+                $predlog=$predlog .$u['ime'];
             }
-            else{$predlog=$predlog .$dan->item(0)->childNodes->item(0)->nodeValue;}
+            else{$predlog=$predlog .$u['dan'];}
          
         } else {
-            if(stristr($ime->item(0)->childNodes->item(0)->nodeValue,$q)){
-                $predlog=$predlog . "<br />".$ime->item(0)->childNodes->item(0)->nodeValue;
+            if(stristr($u['ime'],$q)){
+                $predlog=$predlog . "<br />".$u['ime'];
             }
-            else{$predlog=$predlog . "<br />".$dan->item(0)->childNodes->item(0)->nodeValue;}
+            else{$predlog=$predlog . "<br />".$u['dan'];}
           
         }
       }
         if($j==10)break;
-    }
+    
   }
 }
 if ($predlog!="") {

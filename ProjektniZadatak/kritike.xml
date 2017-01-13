@@ -1,0 +1,11 @@
+<?xml version='1.0' ?>
+<kritike>
+<kritika>
+<ime>Annie</ime>
+<opis>Kritika uvazenog administratora, kao bas dobra prestava </opis>
+</kritika>
+<kritika>
+<ime>Radnja na uglu</ime>
+<opis>Neki sažetak teksta kritike iz novina bi isao ovdje, ovo je samo test</opis>
+</kritika>
+</kritike>

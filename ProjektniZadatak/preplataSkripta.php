@@ -25,39 +25,26 @@ if(!(filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL))){
 if (!(isset($_POST['preplatacheck'])))
 {$msg = "Nije chekirana preplata!<br>";}
 if(empty($msg)){
-$xmldoc  = "preplate.xml";
-if(!file_exists($xmldoc)){ 
-if($fp=fopen("preplate.xml",'w+')){
-fwrite($fp,"<?xml version='1.0' ?>". PHP_EOL);
-fwrite($fp,"<preplate>" . PHP_EOL);
-fwrite($fp,"<preplata>" . PHP_EOL);
-fwrite($fp,'<ime>'.html_entity_decode($_POST['ime'])."</ime>". PHP_EOL);
-fwrite($fp,'<prezime>'.html_entity_decode($_POST['prezime'])."</prezime>". PHP_EOL);
-    fwrite($fp,'<telefon>'.html_entity_decode($_POST['telefon'])."</telefon>". PHP_EOL);
-    fwrite($fp,'<mail>'.html_entity_decode($_POST['mail'])."</mail>". PHP_EOL);
-fwrite($fp,"</preplata>" . PHP_EOL);
-fwrite($fp,"</preplate>" . PHP_EOL);
-fclose($fp);
-$msg =  "XML dokumenat pod nazivom ".$xmldoc. " je kreiran!";
-}else{
-$msg =  "Greska!";
-}
-}else{
-    if($fp=fopen("preplate.xml",'r+')){
-fseek($fp, -13, SEEK_END);
-fwrite($fp,"<preplata>" . PHP_EOL);
-fwrite($fp,'<ime>'.$_POST['ime']."</ime>". PHP_EOL);
-fwrite($fp,'<prezime>'.$_POST['prezime']."</prezime>". PHP_EOL);
-    fwrite($fp,'<telefon>'.$_POST['telefon']."</telefon>". PHP_EOL);
-    fwrite($fp,'<mail>'.$_POST['mail']."</mail>". PHP_EOL);
-fwrite($fp,"</preplata>" . PHP_EOL);
-
-fwrite($fp,"</preplate>" . PHP_EOL);
-fclose($fp);
-$msg =  "XML dokumenat pod nazivom ".$xmldoc. " je update-ovan!";        
-    }
-else {$msg = "Fajl je vec kreiran!";}
-}
+$dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+    $name=$_POST['ime'];
+    $lastname= $_POST['prezime'];    
+    $telvar=$_POST['telefon'];
+    $mailvar=$_POST['mail'];
+    $tel = (string)$telvar; 
+    $mail = (string)$mailvar;    
+    #Nisu dozvoljene dvije preplate na isti mail
+    $preplatasql = $dbh->prepare("SELECT COUNT(id) AS broj FROM preplata WHERE mail= :mail");
+    $preplatasql->bindParam(':mail', $mail);
+    $preplatasql->execute();
+    $row=$preplatasql->fetch(PDO::FETCH_ASSOC);
+    if ($row['broj']==0){
+    $preplatasql = $dbh->prepare("INSERT INTO `preplata`  (`ime`, `prezime`, `telefon`, `mail`) VALUES (?, ?, ?, ?)");
+    $preplatasql->execute(array(
+    $name,
+        $lastname,
+        $tel,
+        $mail
+   ));}
 }
 }
 ?>

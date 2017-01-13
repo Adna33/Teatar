@@ -10,6 +10,7 @@
 
 <BODY>
   <?php session_start(); ?>
+     <?php include ("xmlBazaSkripta.php")?>
         <script src="funkcionalnosti.js"></script>
         <div id="wrapper">
             <div id="zaglavlje">
@@ -38,7 +39,7 @@
 
             <div id="sadrzaj">
                 <div class="red">
-                    <h1>Unos Podataka u XML <br/></h1>
+                    <h1>Unos Podataka <br/></h1>
                     <br/>
                     <br/>
                     <center>
@@ -50,9 +51,14 @@
                             </form>
                             <form action="UnosPredstave.php">
                                 <button type="submit" class="myButton" name="unosPredstave" id="unosPredstave">
-                                    <span class="add">Unos predstava za pretragu</span>
+                                    <span class="add">Unos podataka za predstave</span>
                                 </button>
                             </form>
+                        <form method="POST" enctype="multipart/form-data"  accept-charset="utf-8" name="bazaForma">
+                                <button type="submit" class="myButton" name="unosBaza" id="unosBaza">
+                                    <span class="add">Ažuriraj bazu sa podacima iz XML-a</span>
+                                </button>
+                        </form>
                         
                     </center>
                 </div>

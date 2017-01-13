@@ -34,15 +34,20 @@
                 <div class="red">
                     <div class="kolona jedan">
                         <h1> Komentari </h1>
-                        <?php
-        $rezultati = new SimpleXMLElement("komentar.xml",null,true);
-        $i=0;
-        foreach ($rezultati->utisak as $u) {
-            $i=$i+1;
-             print "<p><b>".$i.". ".$u->name. PHP_EOL."</b></p>";
-            print "<p>".$u->komentar. PHP_EOL."</p><br>";
-        }
-        ?>
+                         <?php
+                         $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+                        $rezultat = $dbh->query("SELECT id, ime, komentar FROM utisak");
+                        if (!$rezultat) {
+                            $greska = $dbh->errorInfo();
+                            print "SQL greška: " . $greska[2];
+                            exit();
+                        }
+                        foreach ($rezultat as $u) {
+                        print "<p><b>".$u['id']."</b></p>";
+                        print "<p><b>".$u['ime']. PHP_EOL."</b></p>";
+                        print "<p><b>".$u['komentar']. PHP_EOL."</b></p>";
+                        }
+                        ?>
                         
                             <form method="POST" enctype="multipart/form-data" accept-charset="utf-8" name="izbrisiUtisak">
                                 <div id="txt">
@@ -60,16 +65,22 @@
                     <div class="kolona jedan">
                         <h1> Preplate </h1>
                         <?php
-            $rezultati = new SimpleXMLElement("preplate.xml",null,true);
-                $i=0;
-            foreach ($rezultati->preplata as $u) {
-            $i=$i+1;
-             print "<p><b>".$i.". ".$u->ime. PHP_EOL."</b></p>";
-            print "<p>".$u->prezime. PHP_EOL."</p>";
-             print "<p>".$u->telefon. PHP_EOL."</p>";
-            print "<p>".$u->mail. PHP_EOL."</p><br><br>";            
-            }
-        ?>
+                         $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+                        $rezultat = $dbh->query("SELECT id, ime, prezime, telefon, mail FROM preplata");
+                        if (!$rezultat) {
+                            $greska = $dbh->errorInfo();
+                            print "SQL greška: " . $greska[2];
+                            exit();
+                        }
+                        foreach ($rezultat as $u) {
+                        print "<p><b>".$u['id']."</b></p>";
+                        print "<p><b>".$u['ime']. PHP_EOL."</b></p>";
+                        print "<p><b>".$u['prezime']. PHP_EOL."</b></p>";
+                        print "<p><b>".$u['telefon']. PHP_EOL."</b></p>";
+                        print "<p><b>".$u['mail']. PHP_EOL."</b></p>";
+                        }
+                        ?>
+        
                             <form method="POST" enctype="multipart/form-data" accept-charset="utf-8" name="izbrisiPreplatu">
                                 <div id="txt">
                                     <label>Izbrisi preplatu broj: </label>
@@ -87,13 +98,18 @@
                     <div class="kolona jedan">
                         <h1> Glasovi </h1>
                         <?php
-                $rezultati = new SimpleXMLElement("rezultatiAnkete.xml",null,true);
-        $i=0;
-        foreach ($rezultati->anketa as $u) {
-            $i=$i+1;
-             print "<p><b>".$i.". ".$u->glas. PHP_EOL."</b></p>";
-        }
-        ?>
+                         $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+                        $rezultat = $dbh->query("SELECT id, glas FROM anketa");
+                        if (!$rezultat) {
+                            $greska = $dbh->errorInfo();
+                            print "SQL greška: " . $greska[2];
+                            exit();
+                        }
+                        foreach ($rezultat as $u) {
+                        print "<p><b>".$u['id']."</b></p>";
+                        print "<p><b>".$u['glas']. PHP_EOL."</b></p>";
+                        }
+                        ?>
                             <form method="POST" enctype="multipart/form-data" accept-charset="utf-8" name="izbrisiUtisak">
                                 <div id="txt">
                                     <label>Izbrisi glas broj: </label>

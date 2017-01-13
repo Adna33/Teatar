@@ -1,14 +1,16 @@
 <?php
     ob_start();
    session_start();
+            $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
             $msg = '';
-            $xmldoc  = "adminData.xml";
-            $admin = new SimpleXMLElement(file_get_contents($xmldoc));
+            
             
             if (isset($_POST['login']) && !empty($_POST['username']) 
                && !empty($_POST['password'])) {
+                $rezultat = $dbh->query("SELECT username, password FROM privilegije");
+                foreach ($rezultat as $u) {
 				
-               if ($_POST['username'] == $admin->username && $_POST['password'] == $admin->password) {
+               if ($_POST['username'] == $u['username'] && $_POST['password'] == $u['password']) {
                   $_SESSION['valid'] = true;
                   $_SESSION['timeout'] = time();
                   $_SESSION['username'] = 'admin';
@@ -20,7 +22,7 @@
                   echo 'Pogrešan username ili password! Preusmjeravanje u toku...';
                    
                    header('Refresh: 2; URL = Admin.php');
-               }
+               }}
             }
 else {
                   echo 'Niste upisali username i password! Preusmjeravanje u toku...';

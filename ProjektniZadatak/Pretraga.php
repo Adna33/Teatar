@@ -52,17 +52,24 @@
             <?php 
     
      if (isset($_REQUEST['unosPretrage'])){
-    $rezultati = new SimpleXMLElement("predstave.xml",null,true);
+        $dbh =  new PDO("mysql:dbname=spirala4;host=localhost;charset=utf8", "admin", "1234");
+        $rezultat = $dbh->query("SELECT ime, dan, opis FROM predstava");
+        if (!$rezultat) {
+                            $greska = $dbh->errorInfo();
+                            print "SQL greška: " . $greska[2];
+                            exit();
+                        }
+         
          
         
-foreach ($rezultati->predstava as $u) { 
+foreach ($rezultat as $u) { 
     
-    if (stristr($u->ime,$_REQUEST['unosPretrage']) || stristr($u->dan,$_REQUEST['unosPretrage']) )
+    if (stristr($u['ime'],$_REQUEST['unosPretrage']) || stristr($u['dan'],$_REQUEST['unosPretrage']) )
     {
         
-        print "<p><b>".$u->ime. PHP_EOL."</b></p>";
-        print "<p>".$u->dan. PHP_EOL."</p>";
-        print "<p>".$u->opis. PHP_EOL."</p><br>";
+        print "<p><b>".$u['ime']. PHP_EOL."</b></p>";
+        print "<p>".$u['dan']. PHP_EOL."</p>";
+        print "<p>".$u['opis']. PHP_EOL."</p><br>";
     }
    
      
