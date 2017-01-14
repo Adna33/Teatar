@@ -8,6 +8,7 @@
 - Implementirana je get metoda u fajlu rest.php koja vraća podatke u JSON formatu
 - Screenshootovi testiranja web servisa u folderu Postman
 - Deploy na Openshift, link početne stranice je : http://teatar-teatar.44fs.preview.openshiftapps.com/ProjektniZadatak/Onama.php
+- Pristup bazi  http://teatar-teatar.44fs.preview.openshiftapps.com/ProjektniZadatak/phpmyadmin username:admin, password:1234
 
 
 ### II  - Šta nije urađeno?
